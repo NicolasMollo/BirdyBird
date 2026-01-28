@@ -264,7 +264,9 @@ GameObject:
   - component: {fileID: 296108341}
   - component: {fileID: 296108346}
   - component: {fileID: 296108350}
+  - component: {fileID: 296108352}
   - component: {fileID: 296108349}
+  - component: {fileID: 296108353}
   - component: {fileID: 296108347}
   - component: {fileID: 296108351}
   m_Layer: 0
@@ -444,6 +446,67 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 1
+--- !u!95 &296108352
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296108340}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a4adf0f231ff3784ab521c1a97274caa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &296108353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296108340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8dfc1847db6db746828a1ca7a993018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flyStateName: Player_Fly
+  _flySpeed: 3
+  _deathStateName: Player_Death
+  _events:
+  - eventName: OnFly
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - eventName: OnDeath
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 296108353}
+          m_TargetAssemblyTypeName: BirdyBird.Player.PlayerAnimation, BirdyBird
+          m_MethodName: SetAnimatorSpeed
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: OnDeathEnd
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

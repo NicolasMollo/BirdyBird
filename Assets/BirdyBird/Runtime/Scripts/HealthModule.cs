@@ -12,14 +12,7 @@ namespace BirdyBird.Modules
         {
             get
             {
-                if (_health < 0f)
-                {
-                    _health = 0f;
-                }
-                else if (_health > _maxHealth)
-                {
-                    _health = _maxHealth;
-                }
+                _health = Mathf.Clamp(_health, 0, _maxHealth);
                 return _health;
             }
             set { _health = value; }

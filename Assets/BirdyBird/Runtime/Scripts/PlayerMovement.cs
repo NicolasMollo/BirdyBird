@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace BirdyBird.Player
 {
+    [DisallowMultipleComponent]
     [RequireComponent(typeof(Rigidbody2D))]
     internal class PlayerMovement : MonoBehaviour
     {

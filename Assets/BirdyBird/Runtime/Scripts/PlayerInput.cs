@@ -13,6 +13,11 @@ namespace BirdyBird.Player
             _inputActions.Player.Enable();
         }
 
+        internal void Disable()
+        {
+            _inputActions.Player.Disable();
+        }
+
         internal void SubscribeOnMove(Action<InputAction.CallbackContext> callback)
         {
             _inputActions.Player.Move.performed += callback;
