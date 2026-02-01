@@ -17,6 +17,7 @@ namespace BirdyBird.Player
         private bool _canMove = false;
         private PlayerAnimation _animation = null;
         private HealthModule _healthModule = null;
+        public HealthModule HealthModule { get { return _healthModule; } }
 
 
         private void Awake()
