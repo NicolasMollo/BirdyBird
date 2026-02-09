@@ -1,4 +1,5 @@
 using BirdyBird.Environment;
+using BirdyBird.Obstacle;
 using BirdyBird.Player;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ namespace BirdyBird
         private PlayerController _player = null;
         [SerializeField]
         private ParallaxSystem _parallax = null;
+        [SerializeField]
+        private ObstacleSystem _obstacles = null;
 
 
         private void Start()
@@ -46,7 +49,8 @@ namespace BirdyBird
 
         private void OnPlayerDeath()
         {
-            _parallax.StopParallax();
+            _parallax.StopSystem();
+            _obstacles.StopSystem();
         }
 
     }

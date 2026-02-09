@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BirdyBird.Environment
+namespace BirdyBird.Movement
 {
     public enum DirectionType : byte
     {
@@ -9,7 +9,7 @@ namespace BirdyBird.Environment
         Up,
         Down
     }
-    internal class ConveyorLoopMovement : MonoBehaviour
+    public class DirectionalMovement : MonoBehaviour
     {
         [SerializeField]
         private DirectionType _directionType = DirectionType.Left;
@@ -19,17 +19,17 @@ namespace BirdyBird.Environment
 
         private void Awake() => SetDirection(_directionType);
 
-        internal void Move()
+        public void Move()
         {
             float calculatedSpeed = _speed * Time.deltaTime;
             Vector3 direction = _direction.normalized;
             transform.position += direction * calculatedSpeed;
         }
-        internal void IncreaseSpeed(float multiplier)
+        public void IncreaseSpeed(float multiplier)
         {
             _speed *= multiplier;
         }
-        internal void SetDirection(DirectionType direction)
+        public void SetDirection(DirectionType direction)
         {
             switch (direction)
             {

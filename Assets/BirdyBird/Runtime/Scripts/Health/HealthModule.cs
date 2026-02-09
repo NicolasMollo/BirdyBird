@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace BirdyBird.Modules
+namespace BirdyBird.Health
 {
     public class HealthModule : MonoBehaviour
     {
@@ -10,16 +10,12 @@ namespace BirdyBird.Modules
         private float _health = 0f;
         private float Health
         {
-            get
-            {
-                _health = Mathf.Clamp(_health, 0, _maxHealth);
-                return _health;
-            }
-            set { _health = value; }
+            get { return _health; }
+            set { _health = Mathf.Clamp(value, 0, _maxHealth); }
         }
         private bool _isDead = false;
 
-        public Action OnDeath = null;
+        public event Action OnDeath = null;
 
 
         private void Awake()

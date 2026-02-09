@@ -1,38 +1,37 @@
+using BirdyBird.Movement;
+using BirdyBird.Toolkit;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace BirdyBird.Environment
 {
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(ConveyorLoopMovement))]
+    [RequireComponent(typeof(DirectionalMovement))]
     internal class ConveyorLoop : MonoBehaviour
     {
-        private ConveyorLoopMovement _movement = null;
-        private List<QueueableItem> _queueables = null;
+        private DirectionalMovement _movement = null;
+        private List<QueueableItem> _queueableList = null;
         private QueueableItem _currentQueueable = null;
-        private float _screenLeftLimit = 0f;
+        private ScreenWorldBounds _screenBounds = null;
 
         private void Awake()
         {
-            _movement = GetComponent<ConveyorLoopMovement>();
-            _queueables = new();
+            _movement = GetComponent<DirectionalMovement>();
+            _screenBounds = new ScreenWorldBounds(Camera.main);
+            _queueableList = new();
             FillQueableList();
         }
         private void Start()
         {
-            Camera mainCamera = Camera.main;
-            Vector2 screenCenter = mainCamera.transform.position;
-            float screenWidth = mainCamera.orthographicSize * 2f * mainCamera.aspect;
-            _screenLeftLimit = screenCenter.x - screenWidth * 0.5f;
             EnqueueAllItem();
-            _currentQueueable = _queueables[0];
+            _currentQueueable = _queueableList[0];
         }
 
         internal void UpdateConveyorLoop()
         {
             _movement.Move();
             float positionX = _currentQueueable.transform.position.x + _currentQueueable.Size.x * 0.5f;
-            if (positionX < _screenLeftLimit)
+            if (positionX < _screenBounds.ScreenLeftLimit)
             {
                 _currentQueueable.Enqueue(GetQueableToJoin());
                 _currentQueueable = GetNextQueable();
@@ -47,43 +46,43 @@ namespace BirdyBird.Environment
             for (int i = 0; i < transform.childCount; i++)
             {
                 queable = transform.GetChild(i).gameObject.AddComponent<QueueableItem>();
-                _queueables.Add(queable);
+                _queueableList.Add(queable);
             }
         }
         private void EnqueueAllItem()
         {
             int previousIndex = 0;
-            for (int i = 0; i < _queueables.Count; i++)
+            for (int i = 0; i < _queueableList.Count; i++)
             {
                 if (i == 0)
                     continue;
                 previousIndex = i - 1;
-                _queueables[i].Enqueue(_queueables[previousIndex]);
+                _queueableList[i].Enqueue(_queueableList[previousIndex]);
             }
         }
 
         private QueueableItem GetQueableToJoin()
         {
-            int currentIndex = _queueables.IndexOf(_currentQueueable);
-            int maxIndex = _queueables.Count - 1;
+            int currentIndex = _queueableList.IndexOf(_currentQueueable);
+            int maxIndex = _queueableList.Count - 1;
             QueueableItem toJoin = null;
 
             if (currentIndex == 0)
-                toJoin = _queueables[maxIndex];
+                toJoin = _queueableList[maxIndex];
             else
-                toJoin = _queueables[currentIndex - 1];
+                toJoin = _queueableList[currentIndex - 1];
             return toJoin;
         }
         private QueueableItem GetNextQueable()
         {
-            int currentIndex = _queueables.IndexOf(_currentQueueable);
-            int maxIndex = _queueables.Count - 1;
+            int currentIndex = _queueableList.IndexOf(_currentQueueable);
+            int maxIndex = _queueableList.Count - 1;
             QueueableItem next = null;
 
             if (currentIndex == maxIndex)
-                next = _queueables[0];
+                next = _queueableList[0];
             else
-                next = _queueables[++currentIndex];
+                next = _queueableList[++currentIndex];
             return next;
         }
     }
