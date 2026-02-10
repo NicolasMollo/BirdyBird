@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4745426001317654770}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -65,7 +65,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.35, y: 0.28}
+  m_Offset: {x: 0, y: 0.28}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -155,6 +155,7 @@ MonoBehaviour:
   _collisionArray:
   - {fileID: 5436809831721426253}
   - {fileID: 8305873537269039565}
+  _scoreTrigger: {fileID: 2054024892523759379}
 --- !u!1001 &497567019477891271
 PrefabInstance:
   m_ObjectHideFlags: 0

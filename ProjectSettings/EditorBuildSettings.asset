@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/BirdyBird/!Scenes/TestScene.unity
+    guid: 4231fb662d1636a43822eba7d29f65c1
+  - enabled: 1
     path: Assets/BirdyBird/!Scenes/GameScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects:

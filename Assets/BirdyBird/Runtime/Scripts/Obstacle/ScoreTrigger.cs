@@ -1,4 +1,5 @@
-﻿using BirdyBird.Player;
+﻿using BirdyBird.Events;
+using BirdyBird.Player;
 using System;
 using UnityEngine;
 
@@ -7,20 +8,25 @@ namespace BirdyBird.Obstacle
     [RequireComponent(typeof(BoxCollider2D))]
     public class ScoreTrigger : MonoBehaviour
     {
-        public event Action OnCollideWithPlayer = null;
+        private BoxCollider2D _collider = null;
 
         private void Awake()
         {
-            BoxCollider2D collider = GetComponent<BoxCollider2D>();
-            collider.isTrigger = true;
+            _collider = GetComponent<BoxCollider2D>();
+            _collider.isTrigger = true;
         }
 
-        private void OnTriggerExit2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.TryGetComponent<PlayerController>(out _))
             {
-                OnCollideWithPlayer?.Invoke();
+                GameEventBus.CallOnScoreTriggerCollision();
             }
+        }
+
+        public void DisableCollision()
+        {
+            _collider.enabled = false;
         }
     }
 }

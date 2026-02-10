@@ -11,6 +11,8 @@ namespace BirdyBird.Obstacle
     {
         [SerializeField]
         private ObstacleCollision[] _collisionArray = null;
+        [SerializeField]
+        private ScoreTrigger _scoreTrigger = null;
         private Vector2 _biggerCollisionSize = Vector2.zero;
         private DirectionalMovement _movement = null;
         private ScreenWorldBounds _screenBounds = null;
@@ -58,6 +60,7 @@ namespace BirdyBird.Obstacle
         {
             for (int i = 0; i < _collisionArray.Length; i++)
                 _collisionArray[i].DisableCollision();
+            _scoreTrigger.DisableCollision();
         }
 
         private void SetBiggerObstacleCollision()

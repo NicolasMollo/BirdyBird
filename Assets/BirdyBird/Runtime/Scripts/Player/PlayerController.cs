@@ -36,6 +36,7 @@ namespace BirdyBird.Player
         private void OnDisable()
         {
             RemoveListeners();
+            _input.Disable();
         }
 
         private void FixedUpdate()
