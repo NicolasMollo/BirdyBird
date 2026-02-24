@@ -1,5 +1,7 @@
 ﻿using BirdyBird.Movement;
+using BirdyBird.Events;
 using UnityEngine;
+using System.Net.Http.Headers;
 
 namespace BirdyBird.Environment
 {
@@ -10,6 +12,9 @@ namespace BirdyBird.Environment
         private bool _canUpdate = false;
 
         private void Awake() => _canUpdate = true;
+
+        private void Start() => GameEventBus.OnGameOverStateEnter += OnGameOverStateEnter;
+        private void OnDestroy() => GameEventBus.OnGameOverStateEnter -= OnGameOverStateEnter;
 
         private void Update()
         {
@@ -32,5 +37,7 @@ namespace BirdyBird.Environment
             for (int i = 0; i < _conveyorLoops.Length; i++)
                 _conveyorLoops[i].SetDirection(direction);
         }
+
+        private void OnGameOverStateEnter() => _canUpdate = false;
     }
 }

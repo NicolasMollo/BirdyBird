@@ -7,15 +7,16 @@ namespace BirdyBird.Score
     public class ScoreManager : MonoBehaviour
     {
         private int _score = 0;
-        public event Action<int> OnScoreIncreased = null;
+        public int Score { get { return _score; } }
+        public event Action<int> OnScoreChanged = null;
 
-        private void Start() => GameEventBus.OnScoreTriggerCollision += OnScoreTriggerCollisionExit;
-        private void OnDestroy() => GameEventBus.OnScoreTriggerCollision -= OnScoreTriggerCollisionExit;
+        private void OnEnable() => GameEventBus.OnScoreTriggerCollision += OnScoreTriggerCollision;
+        private void OnDisable() => GameEventBus.OnScoreTriggerCollision -= OnScoreTriggerCollision;
 
-        private void OnScoreTriggerCollisionExit()
+        private void OnScoreTriggerCollision()
         {
             _score++;
-            OnScoreIncreased?.Invoke(_score);
+            OnScoreChanged?.Invoke(_score);
         }
     }
 }

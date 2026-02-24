@@ -1,6 +1,5 @@
 ﻿using BirdyBird.Events;
 using BirdyBird.Player;
-using System;
 using UnityEngine;
 
 namespace BirdyBird.Obstacle

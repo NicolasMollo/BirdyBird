@@ -1,4 +1,5 @@
-﻿using BirdyBird.Movement;
+﻿using BirdyBird.Events;
+using BirdyBird.Movement;
 using BirdyBird.Toolkit;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,15 +29,17 @@ namespace BirdyBird.Obstacle
             _obstacleList = _pooler.CreatePool(transform);
             foreach (Obstacle obstacle in _obstacleList)
             {
-                obstacle.OnOutOfScreenLeftBound += OnCompoundObstacleIsOutOfScreen;
+                obstacle.OnOutOfScreenLeftBound += OnObstacleIsOutOfScreen;
                 obstacle.gameObject.SetActive(false);
             }
             _spawner.SetUp(_obstacleList);
+            GameEventBus.OnGameOverStateEnter += OnGameOverStateEnter;
         }
         private void OnDestroy()
         {
+            GameEventBus.OnGameOverStateEnter -= OnGameOverStateEnter;
             foreach (Obstacle obstacle in _obstacleList)
-                obstacle.OnOutOfScreenLeftBound -= OnCompoundObstacleIsOutOfScreen;
+                obstacle.OnOutOfScreenLeftBound -= OnObstacleIsOutOfScreen;
         }
         private void Update()
         {
@@ -78,11 +81,12 @@ namespace BirdyBird.Obstacle
                 _obstacleList[i].SetDirection(direction);
         }
 
-        private void OnCompoundObstacleIsOutOfScreen(Transform transform)
+        private void OnObstacleIsOutOfScreen(Transform transform)
         {
             transform.gameObject.SetActive(false);
             transform.position = this.transform.position;
         }
+        private void OnGameOverStateEnter() => _canUpdate = false;
 
     }
 }

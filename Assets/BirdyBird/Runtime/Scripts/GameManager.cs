@@ -1,8 +1,6 @@
-using BirdyBird.Environment;
-using BirdyBird.Obstacle;
+using BirdyBird.AI;
 using BirdyBird.Player;
 using BirdyBird.UI;
-using BirdyBird.Score;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,26 +10,20 @@ namespace BirdyBird
     public class GameManager : MonoBehaviour
     {
         [SerializeField]
+        private Fsm _fsm = null;
+        [SerializeField]
         private PlayerController _player = null;
         [SerializeField]
-        private ParallaxSystem _parallax = null;
-        [SerializeField]
-        private ObstacleSystem _obstacles = null;
-        [SerializeField]
-        private UI_Score _scoreUI = null;
-        [SerializeField]
-        private ScoreManager _scoreManager = null;
-
+        private UISystem _UI = null;
 
         private void Start()
         {
+            _fsm.Init();
             AddListeners();
         }
+        private void OnDestroy() => RemoveListeners();
 
-        private void OnDestroy()
-        {
-            RemoveListeners();
-        }
+       
 
         private void Update()
         {
@@ -49,23 +41,21 @@ namespace BirdyBird
         private void AddListeners()
         {
             _player.HealthModule.OnDeath += OnPlayerDeath;
-            _scoreManager.OnScoreIncreased += OnScoreIncreased;
+            _UI.SubOnReloadButtonClick(OnReloadButtonClick);
         }
         private void RemoveListeners()
         {
             _player.HealthModule.OnDeath -= OnPlayerDeath;
-            _scoreManager.OnScoreIncreased -= OnScoreIncreased;
+            _UI.UnsubFromOnReloadButtonClick(OnReloadButtonClick);
         }
 
         private void OnPlayerDeath()
         {
-            _parallax.StopSystem();
-            _obstacles.StopSystem();
+            _fsm.ChangeState<GameOverState>();
         }
-
-        private void OnScoreIncreased(int score)
+        private void OnReloadButtonClick()
         {
-            _scoreUI.SetScoreText(score.ToString());
+            SceneManager.LoadScene(0, LoadSceneMode.Single);
         }
 
     }
