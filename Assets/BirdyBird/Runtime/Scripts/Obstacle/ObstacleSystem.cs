@@ -23,6 +23,10 @@ namespace BirdyBird.Obstacle
             _obstacleList = new();
             _canUpdate = true;
         }
+
+        private void OnEnable() => AddListeners();
+        private void OnDisable() => RemoveListeners();
+
         private void Start()
         {
             SetPosition();
@@ -33,11 +37,9 @@ namespace BirdyBird.Obstacle
                 obstacle.gameObject.SetActive(false);
             }
             _spawner.SetUp(_obstacleList);
-            GameEventBus.OnGameOverStateEnter += OnGameOverStateEnter;
         }
         private void OnDestroy()
         {
-            GameEventBus.OnGameOverStateEnter -= OnGameOverStateEnter;
             foreach (Obstacle obstacle in _obstacleList)
                 obstacle.OnOutOfScreenLeftBound -= OnObstacleIsOutOfScreen;
         }
@@ -55,8 +57,7 @@ namespace BirdyBird.Obstacle
         private void SetPosition()
         {
             ScreenWorldBounds screenBounds = new(Camera.main);
-            Vector2 position =
-             new Vector2(screenBounds.ScreenRightLimit + POSITION_OFFSET, transform.position.y);
+            Vector2 position = new Vector2(screenBounds.ScreenRightLimit + POSITION_OFFSET, transform.position.y);
             transform.position = position;
         }
         public void StopSystem()
@@ -86,7 +87,22 @@ namespace BirdyBird.Obstacle
             transform.gameObject.SetActive(false);
             transform.position = this.transform.position;
         }
-        private void OnGameOverStateEnter() => _canUpdate = false;
+
+        private void AddListeners()
+        {
+            GameEventBus.OnGameIdleStateEnter += OnGameIdleStateEnter;
+            GameEventBus.OnGameStateEnter += OnGameStateEnter;
+            GameEventBus.OnGameOverStateEnter += OnGameOverStateEnter;
+        }
+        private void RemoveListeners()
+        {
+            GameEventBus.OnGameOverStateEnter -= OnGameOverStateEnter;
+            GameEventBus.OnGameStateEnter -= OnGameStateEnter;
+            GameEventBus.OnGameIdleStateEnter -= OnGameIdleStateEnter;
+        }
+        private void OnGameIdleStateEnter() => StopSystem();
+        private void OnGameStateEnter() => StartSystem();
+        private void OnGameOverStateEnter() => StopSystem();
 
     }
 }

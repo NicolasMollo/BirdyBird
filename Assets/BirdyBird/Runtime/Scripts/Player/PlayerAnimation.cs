@@ -10,10 +10,13 @@ namespace BirdyBird.Player
     {
         private Animator _animator = null;
         private int _flyStateNameHash = 0;
+        private int _idleStateNameHash = 0;
         [SerializeField]
         private string _flyStateName = string.Empty;
         [SerializeField]
         private float _flySpeed = 0f;
+        [SerializeField]
+        private string _idleStateName = string.Empty;
         [SerializeField]
         private List<Animation.AnimationEvent> _events = new List<Animation.AnimationEvent>();
 
@@ -22,6 +25,7 @@ namespace BirdyBird.Player
         {
             _animator = GetComponent<Animator>();
             _flyStateNameHash = Animator.StringToHash(_flyStateName);
+            _idleStateNameHash = Animator.StringToHash(_idleStateName);
             SetAnimatorSpeed(_flySpeed);
         }
 
@@ -30,6 +34,7 @@ namespace BirdyBird.Player
             Animation.AnimationEvent animationEvent = _events.Find(ev => ev.eventName == name);
             animationEvent.OnAnimationEvent?.Invoke();
         }
+        public void Idle() => _animator.Play(_idleStateNameHash);
         public void Fly() => _animator.Play(_flyStateNameHash);
         public void SetAnimatorSpeed(float speed) => _animator.speed = speed;
 

@@ -1,7 +1,6 @@
-﻿using BirdyBird.Movement;
-using BirdyBird.Events;
+﻿using BirdyBird.Events;
+using BirdyBird.Movement;
 using UnityEngine;
-using System.Net.Http.Headers;
 
 namespace BirdyBird.Environment
 {
@@ -13,8 +12,8 @@ namespace BirdyBird.Environment
 
         private void Awake() => _canUpdate = true;
 
-        private void Start() => GameEventBus.OnGameOverStateEnter += OnGameOverStateEnter;
-        private void OnDestroy() => GameEventBus.OnGameOverStateEnter -= OnGameOverStateEnter;
+        private void OnEnable() => GameEventBus.OnGameOverStateEnter += OnGameOverStateEnter;
+        private void OnDisable() => GameEventBus.OnGameOverStateEnter -= OnGameOverStateEnter;
 
         private void Update()
         {

@@ -23,6 +23,7 @@ namespace BirdyBird.Player
         private float _rotationTarget = 0f;
         private float _currentRotationSpeed = 0f;
         private const float FALLDOWN_ROTATION_SPEED = 2f;
+        private bool _canRotate = false;
 
 
         private void Awake()
@@ -36,7 +37,10 @@ namespace BirdyBird.Player
         }
         private void FixedUpdate()
         {
-            Rotate();
+            if (_canRotate)
+            {
+                Rotate();
+            }
         }
 
         private void Rotate()
@@ -64,6 +68,16 @@ namespace BirdyBird.Player
             Vector2 velocity = directionNormalized * _movementSpeed;
 
             _rb.velocity = velocity;
+        }
+        internal void Disable()
+        {
+            _rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            _canRotate = false;
+        }
+        internal void Enable()
+        {
+            _canRotate = true;
+            _rb.constraints = RigidbodyConstraints2D.FreezePositionX;
         }
 
     }

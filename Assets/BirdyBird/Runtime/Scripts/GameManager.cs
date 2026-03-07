@@ -1,62 +1,38 @@
-using BirdyBird.AI;
-using BirdyBird.Player;
-using BirdyBird.UI;
+using BirdyBird.InputSystem;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace BirdyBird
 {
+    [DefaultExecutionOrder(-1)]
+    // To do:
+    // Create a bootstrap scene and remove "[DefaultExecutionOrder(-1)]" attribute
     [DisallowMultipleComponent]
     public class GameManager : MonoBehaviour
     {
-        [SerializeField]
-        private Fsm _fsm = null;
-        [SerializeField]
-        private PlayerController _player = null;
-        [SerializeField]
-        private UISystem _UI = null;
-
-        private void Start()
+        public static GameManager Instance
         {
-            _fsm.Init();
-            AddListeners();
+            get;
+            private set;
+        } = null;
+
+        [SerializeField]
+        private InputActionContainer _inputContainer = null;
+        public InputActionContainer InputContainer { get { return _inputContainer; } }
+
+        private void Awake()
+        {
+            SetSingleton();
         }
-        private void OnDestroy() => RemoveListeners();
-
-       
-
-        private void Update()
+        private void SetSingleton()
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Instance != null)
             {
-                // _parallax.StopParallax();
-                SceneManager.LoadScene(0);
+                Destroy(this.gameObject);
             }
-            else if (Input.GetKeyDown(KeyCode.B))
+            else
             {
-                // _parallax.IncreaseSpeed(1.5f);
+                Instance = this;
             }
         }
-
-        private void AddListeners()
-        {
-            _player.HealthModule.OnDeath += OnPlayerDeath;
-            _UI.SubOnReloadButtonClick(OnReloadButtonClick);
-        }
-        private void RemoveListeners()
-        {
-            _player.HealthModule.OnDeath -= OnPlayerDeath;
-            _UI.UnsubFromOnReloadButtonClick(OnReloadButtonClick);
-        }
-
-        private void OnPlayerDeath()
-        {
-            _fsm.ChangeState<GameOverState>();
-        }
-        private void OnReloadButtonClick()
-        {
-            SceneManager.LoadScene(0, LoadSceneMode.Single);
-        }
-
     }
 }

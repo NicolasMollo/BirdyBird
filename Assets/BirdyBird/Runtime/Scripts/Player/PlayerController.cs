@@ -1,4 +1,6 @@
+using BirdyBird.Events;
 using BirdyBird.Health;
+using BirdyBird.InputSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,16 +21,19 @@ namespace BirdyBird.Player
         private HealthModule _healthModule = null;
         public HealthModule HealthModule { get { return _healthModule; } }
 
-
+        public void Init(InputActionContainer inputContainer)
+        {
+            _input = new PlayerInput(inputContainer);
+            _input.SubscribeOnMove(OnMoveInputPerformed);
+            _input.Disable();
+        }
         private void Awake()
         {
-            _input = new PlayerInput();
             _movement = GetComponent<PlayerMovement>();
-            _canMove = false;
             _animation = GetComponent<PlayerAnimation>();
             _healthModule = GetComponent<HealthModule>();
+            _canMove = false;
         }
-
         private void OnEnable()
         {
             AddListeners();
@@ -51,11 +56,14 @@ namespace BirdyBird.Player
 
         private void AddListeners()
         {
-            _input.SubscribeOnMove(OnMoveInputPerformed);
             _healthModule.OnDeath += OnDeath;
+            GameEventBus.OnGameIdleStateEnter += OnGameIdleStateEnter;
+            GameEventBus.OnGameStateEnter += OnGameStateEnter;
         }
         private void RemoveListeners()
         {
+            GameEventBus.OnGameStateEnter -= OnGameStateEnter;
+            GameEventBus.OnGameIdleStateEnter -= OnGameIdleStateEnter;
             _healthModule.OnDeath -= OnDeath;
             _input.UnsubscribeFromMove(OnMoveInputPerformed);
         }
@@ -66,6 +74,18 @@ namespace BirdyBird.Player
         private void OnDeath()
         {
             _input.Disable();
+        }
+
+        private void OnGameIdleStateEnter()
+        {
+            // _input?.Disable();
+            _movement.Disable();
+        }
+        private void OnGameStateEnter()
+        {
+            _input.Enable();
+            _movement.Enable();
+            _animation.Idle();
         }
 
     }
