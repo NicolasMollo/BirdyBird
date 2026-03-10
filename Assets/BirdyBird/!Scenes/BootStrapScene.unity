@@ -676,6 +676,8 @@ GameObject:
   m_Component:
   - component: {fileID: 799437045}
   - component: {fileID: 799437046}
+  - component: {fileID: 799437048}
+  - component: {fileID: 799437047}
   m_Layer: 5
   m_Name: LoadingMenu
   m_TagString: Untagged
@@ -717,10 +719,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb2e95852e6fe94e81779dc4ed11390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &799437047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799437044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee1df7b999a761644927f8d6f1f359d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _loadingText: {fileID: 771602825}
   _loadingBar: {fileID: 817119770}
   _loadingBarBackground: {fileID: 277517366}
   _loadingPercentangeText: {fileID: 227598772}
+--- !u!114 &799437048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799437044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce100d2b105e4a34db564bf6eaa33d99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _delay: 10
 --- !u!1 &817119768
 GameObject:
@@ -838,7 +864,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768123484}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
