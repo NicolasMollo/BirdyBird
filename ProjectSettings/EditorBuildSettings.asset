@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/BirdyBird/!Scenes/GameScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/BirdyBird/!Scenes/BootStrapScene.unity
+    guid: b45065cb5a8619742831db5d55854edc
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 5e3690637c1807a45b27e27e751f1048, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 701b3bd9a84013849b769f4b92fb4053, type: 3}

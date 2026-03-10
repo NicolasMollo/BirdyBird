@@ -22,6 +22,7 @@ namespace BirdyBird
         private void Awake()
         {
             SetSingleton();
+            DontDestroyOnLoad(this);
         }
         private void SetSingleton()
         {
