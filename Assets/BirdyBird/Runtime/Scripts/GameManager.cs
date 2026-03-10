@@ -3,9 +3,6 @@ using UnityEngine;
 
 namespace BirdyBird
 {
-    [DefaultExecutionOrder(-1)]
-    // To do:
-    // Create a bootstrap scene and remove "[DefaultExecutionOrder(-1)]" attribute
     [DisallowMultipleComponent]
     public class GameManager : MonoBehaviour
     {

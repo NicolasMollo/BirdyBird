@@ -16,7 +16,7 @@ namespace BirdyBird.UI.Loading
         }
         private void OnEnable() => _model.OnDelayReached += OnDelayReached;
         private void OnDisable() => _model.OnDelayReached -= OnDelayReached;
-        private void OnDelayReached() => SceneManager.LoadScene(0, LoadSceneMode.Single);
+        private void OnDelayReached() => SceneManager.LoadScene(1, LoadSceneMode.Single);
 
         private void Update()
         {

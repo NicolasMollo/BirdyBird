@@ -80,7 +80,7 @@ namespace BirdyBird.Level
         }
         private void OnReloadButtonClick()
         {
-            SceneManager.LoadScene(0, LoadSceneMode.Single);
+            SceneManager.LoadScene(2, LoadSceneMode.Single);
         }
 
         private void OnGameIdleStateEnter()
