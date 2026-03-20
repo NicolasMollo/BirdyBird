@@ -14,11 +14,12 @@ namespace BirdyBird.Environment
 
         private void Awake() => _sr = GetComponent<SpriteRenderer>();
 
-        public void Enqueue(QueueableItem toJoin)
+        internal void Enqueue(QueueableItem toJoin)
         {
             float positionX = toJoin.transform.position.x + toJoin.Size.x;
             Vector2 position = new Vector2(positionX, toJoin.transform.position.y);
             transform.position = position;
         }
+        internal void SetSprite(Sprite sprite) => _sr.sprite = sprite;
     }
 }

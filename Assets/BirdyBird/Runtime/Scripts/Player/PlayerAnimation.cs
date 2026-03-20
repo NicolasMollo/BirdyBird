@@ -37,6 +37,7 @@ namespace BirdyBird.Player
         public void Idle() => _animator.Play(_idleStateNameHash);
         public void Fly() => _animator.Play(_flyStateNameHash);
         public void SetAnimatorSpeed(float speed) => _animator.speed = speed;
+        internal void SetAnimatorController(RuntimeAnimatorController animatorController) => _animator.runtimeAnimatorController = animatorController;
 
     }
 }

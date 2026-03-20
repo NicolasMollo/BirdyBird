@@ -5,10 +5,22 @@ using UnityEngine;
 
 namespace BirdyBird.Environment
 {
+    public enum ConveyorLoopType
+    {
+        Background_0,
+        Background_1,
+        Midground_0,
+        Midground_1,
+        Foreground
+    }
+
     [DisallowMultipleComponent]
     [RequireComponent(typeof(DirectionalMovement))]
     internal class ConveyorLoop : MonoBehaviour
     {
+        [SerializeField]
+        private ConveyorLoopType _type = ConveyorLoopType.Background_0;
+        public ConveyorLoopType Type { get => _type; }
         private DirectionalMovement _movement = null;
         private List<QueueableItem> _queueableList = null;
         private QueueableItem _currentQueueable = null;
@@ -39,6 +51,11 @@ namespace BirdyBird.Environment
         }
         internal void IncreaseSpeed(float multiplier) => _movement.IncreaseSpeed(multiplier);
         internal void SetDirection(DirectionType direction) => _movement.SetDirection(direction);
+        internal void SetQueueableListSprites(Sprite sprite)
+        {
+            foreach (QueueableItem item in _queueableList)
+                item.SetSprite(sprite);
+        }
 
         private void FillQueableList()
         {

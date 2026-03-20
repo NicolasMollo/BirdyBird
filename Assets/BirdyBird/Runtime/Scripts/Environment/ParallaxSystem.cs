@@ -1,5 +1,7 @@
 ﻿using BirdyBird.Events;
 using BirdyBird.Movement;
+using BirdyBird.UI.Start;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BirdyBird.Environment
@@ -23,6 +25,19 @@ namespace BirdyBird.Environment
                 _conveyorLoops[i].UpdateConveyorLoop();
         }
 
+        public void Init(List<ParallaxViewEntry> parallaxViewList)
+        {
+            foreach (ConveyorLoop conveyorLoop in _conveyorLoops)
+            {
+                for (int i = 0; i < parallaxViewList.Count; i++)
+                {
+                    if (parallaxViewList[i].type == conveyorLoop.Type)
+                    {
+                        conveyorLoop.SetQueueableListSprites(parallaxViewList[i].sprite);
+                    }
+                }
+            }
+        }
         public void StopSystem() => _canUpdate = false;
         public void StartSystem() => _canUpdate = true;
 

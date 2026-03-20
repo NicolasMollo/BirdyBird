@@ -1,11 +1,13 @@
 using BirdyBird.AI;
+using BirdyBird.Data;
+using BirdyBird.Environment;
 using BirdyBird.Events;
 using BirdyBird.InputSystem;
 using BirdyBird.Player;
 using BirdyBird.UI;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace BirdyBird.Level
 {
@@ -16,7 +18,11 @@ namespace BirdyBird.Level
         [SerializeField]
         private PlayerController _player = null;
         [SerializeField]
+        private ParallaxSystem _parallaxSystem = null;
+        [SerializeField]
         private UISystem _UI = null;
+        [SerializeField]
+        private LevelConfigurationData _viewConfigurationData = null;
 
         private InputActionContainer _input = null;
 
@@ -29,7 +35,8 @@ namespace BirdyBird.Level
         {
             AddListeners();
             _fsm.Init();
-            _player.Init(_input);
+            _player.Init(_input, _viewConfigurationData.playerViewData.AnimatorController);
+            _parallaxSystem.Init(_viewConfigurationData.parallaxViewData.SpriteList);
         }
         private void SetUpDependencies()
         {

@@ -21,11 +21,12 @@ namespace BirdyBird.Player
         private HealthModule _healthModule = null;
         public HealthModule HealthModule { get { return _healthModule; } }
 
-        public void Init(InputActionContainer inputContainer)
+        public void Init(InputActionContainer inputContainer, RuntimeAnimatorController animatorController)
         {
             _input = new PlayerInput(inputContainer);
             _input.SubscribeOnMove(OnMoveInputPerformed);
             _input.Disable();
+            _animation.SetAnimatorController(animatorController);
         }
         private void Awake()
         {

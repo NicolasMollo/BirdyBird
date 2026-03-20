@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e475e58ac4cb45ba7646bc66d2a16, type: 3}
+  m_Name: Parallax03_ViewData
+  m_EditorClassIdentifier: 
+  _spriteList:
+  - type: 0
+    sprite: {fileID: -7113981315608788537, guid: 4c811c79acd28f0478f3fbeba4b48399, type: 3}
+  - type: 1
+    sprite: {fileID: -5843076362923805849, guid: 718874d5f8b932142bcd05d96b459f1b, type: 3}
+  - type: 2
+    sprite: {fileID: 8538270705466712782, guid: 4f9d92a828f2aae4cb1075a919bfd0be, type: 3}
+  - type: 3
+    sprite: {fileID: 1153061350772751188, guid: 6ee4bfdb221372747b23561a3de6cb90, type: 3}
+  - type: 4
+    sprite: {fileID: 3268891921755203321, guid: 0b4c3554bfab0fe4d8b39a48356422e3, type: 3}
