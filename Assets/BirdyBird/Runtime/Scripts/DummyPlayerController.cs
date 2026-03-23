@@ -1,4 +1,3 @@
-using BirdyBird.UI.Start;
 using UnityEngine;
 
 namespace BirdyBird.DummyPlayer
@@ -8,15 +7,13 @@ namespace BirdyBird.DummyPlayer
     public class DummyPlayerController : MonoBehaviour
     {
         private Animator _animator = null;
+        [SerializeField]
+        private float _animatorSpeed = 0f;
 
         private void Awake() => _animator = GetComponent<Animator>();
-        private void Start()
-        {
-            _animator.speed = 3.0f;
-        }
+        private void Start() => _animator.speed = _animatorSpeed;
 
         public void SetAnimatorController(RuntimeAnimatorController animatorController)
             => _animator.runtimeAnimatorController = animatorController;
-
     }
 }

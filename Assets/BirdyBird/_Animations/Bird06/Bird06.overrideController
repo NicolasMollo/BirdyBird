@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bird06
+  m_Controller: {fileID: 9100000, guid: a4adf0f231ff3784ab521c1a97274caa, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: b80a8f7c7c01c944badaec81c6bb5cde, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9b306d2e2de5c42428dbf4ba118dfd65, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 6b780b4adf1ae7e4a9926e233be87a37, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8a447641e92dd9542bfbd1f49a9c371b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1dda760db80ac274a9382ee6cd9a6f90, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9dd4480086e8015468fed6e5b0753483, type: 2}
