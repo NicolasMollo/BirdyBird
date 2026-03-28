@@ -1,13 +1,12 @@
 using BirdyBird.Data;
-using BirdyBird.DummyPlayer;
-using BirdyBird.Environment;
+using BirdyBird.Start.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace BirdyBird.UI.Start
+namespace BirdyBird.Start
 {
-    public class StartMenu : MonoBehaviour
+    public class StartSceneController : MonoBehaviour
     {
         [SerializeField]
         private Button _playButton = null;
@@ -15,14 +14,10 @@ namespace BirdyBird.UI.Start
         private PlayerSelectionBlock _playerSelectionBlock = null;
         [SerializeField]
         private ParallaxSelectionBlock _parallaxBlock = null;
-
-
-        [SerializeField]
-        private DummyPlayerController _dummyPlayer = null;
-        [SerializeField]
-        private ParallaxSystem _dummyParallax = null;
         [SerializeField]
         private LevelConfigurationData _levelConfigurationData = null;
+        [SerializeField]
+        private LevelPreviewController _levelPreview = null;
 
         private void OnEnable()
         {
@@ -37,20 +32,17 @@ namespace BirdyBird.UI.Start
             _playButton.onClick.RemoveListener(OnClickPlayButton);
         }
 
-        private void OnClickPlayButton()
-        {
-            SceneManager.LoadScene(2, LoadSceneMode.Single);
-        }
+        private void OnClickPlayButton() => SceneManager.LoadScene(2, LoadSceneMode.Single);
 
         private void OnSelectPlayerViewData(PlayerViewData data)
         {
             _levelConfigurationData.playerViewData = data;
-            _dummyPlayer.SetAnimatorController(_levelConfigurationData.playerViewData.AnimatorController);
+            _levelPreview.UpdatePlayerView(_levelConfigurationData.playerViewData);
         }
         private void OnSelectParallaxViewData(ParallaxViewData data)
         {
             _levelConfigurationData.parallaxViewData = data;
-            _dummyParallax.Init(_levelConfigurationData.parallaxViewData.SpriteList);
+            _levelPreview.UpdateParallaxView(_levelConfigurationData.parallaxViewData);
         }
 
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BirdyBird.UI.Start
+namespace BirdyBird.Start.UI
 {
     public abstract class SelectionBlock<T> : MonoBehaviour where T : BaseViewData
     {

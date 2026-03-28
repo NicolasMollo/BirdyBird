@@ -1,6 +1,6 @@
 ﻿using BirdyBird.Events;
 using BirdyBird.Movement;
-using BirdyBird.UI.Start;
+using BirdyBird.Start.UI;
 using System.Collections.Generic;
 using UnityEngine;
 

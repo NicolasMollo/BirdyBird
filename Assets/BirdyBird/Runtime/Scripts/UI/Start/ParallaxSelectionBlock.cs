@@ -1,4 +1,4 @@
-﻿namespace BirdyBird.UI.Start
+﻿namespace BirdyBird.Start.UI
 {
     public class ParallaxSelectionBlock : SelectionBlock<ParallaxViewData>
     {

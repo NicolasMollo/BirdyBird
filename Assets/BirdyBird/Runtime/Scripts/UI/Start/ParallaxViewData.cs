@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BirdyBird.UI.Start
+namespace BirdyBird.Start.UI
 {
     [Serializable]
     public struct ParallaxViewEntry

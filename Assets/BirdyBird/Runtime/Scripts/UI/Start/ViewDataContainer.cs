@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BirdyBird.UI.Start
+namespace BirdyBird.Start.UI
 {
     public abstract class ViewDataContainer<T> : MonoBehaviour where T : BaseViewData
     {

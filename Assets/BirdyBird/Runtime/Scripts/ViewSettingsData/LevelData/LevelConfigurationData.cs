@@ -1,4 +1,4 @@
-using BirdyBird.UI.Start;
+using BirdyBird.Start.UI;
 using UnityEngine;
 
 namespace BirdyBird.Data

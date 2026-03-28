@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BirdyBird.UI.Start
+namespace BirdyBird.Start.UI
 {
     [CreateAssetMenu(menuName = "SO/ViewData/Player")]
     public class PlayerViewData : BaseViewData

@@ -1,5 +1,8 @@
 using UnityEngine;
 
-public abstract class BaseViewData : ScriptableObject
+namespace BirdyBird
 {
+    public abstract class BaseViewData : ScriptableObject
+    {
+    }
 }
