@@ -4,6 +4,7 @@ using BirdyBird.Toolkit;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace BirdyBird.UI
 {
@@ -19,6 +20,8 @@ namespace BirdyBird.UI
         private FadeableItem _panel = null;
         [SerializeField]
         private TextMeshProUGUI _tapHereText = null;
+        [SerializeField]
+        private Image _scoreBackground = null;
 
         private void Start()
         {
@@ -71,5 +74,9 @@ namespace BirdyBird.UI
         }
         public void SubOnReloadButtonClick(UnityAction callback) => _gameOverMenu.SubOnReloadButtonClick(callback);
         public void UnsubFromOnReloadButtonClick(UnityAction callback) => _gameOverMenu.UnsubFromOnReloadButtonClick(callback);
+        public void SubOnExitButtonClick(UnityAction callback) => _gameOverMenu.SubOnExitButtonClick(callback);
+        public void UnsubFromOnExitButtonClick(UnityAction callback) => _gameOverMenu.UnsubFromOnExitButtonClick(callback);
+        public void SetBackgroundScoreColor(Color color) => _scoreBackground.color = color;
+        public void SetTapHereTextColor(Color color) => _tapHereText.color = color;
     }
 }

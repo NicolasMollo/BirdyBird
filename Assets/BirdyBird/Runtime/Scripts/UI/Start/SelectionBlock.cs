@@ -15,15 +15,15 @@ namespace BirdyBird.Start.UI
         private List<ViewDataContainer<T>> _viewDataList = null;
 
         private ViewDataContainer<T> _selectedViewData = null;
-        public Action<T> OnSelectViewData = null;
+        public Action<T, int> OnSelectViewData = null;
 
-
-        private void Start()
+        public void Init(int selectedViewDataIndex = 0)
         {
             foreach (ViewDataContainer<T> viewData in _viewDataList)
                 viewData.gameObject.SetActive(false);
-            SetSelectedViewData(0);
+            SetSelectedViewData(selectedViewDataIndex);
         }
+
         private void OnEnable()
         {
             _leftButton.onClick.AddListener(SelectPreviousViewData);
@@ -57,7 +57,7 @@ namespace BirdyBird.Start.UI
                 _selectedViewData.gameObject.SetActive(false);
             _selectedViewData = _viewDataList[index];
             _selectedViewData.gameObject.SetActive(true);
-            OnSelectViewData?.Invoke(_selectedViewData.ViewData);
+            OnSelectViewData?.Invoke(_selectedViewData.ViewData, index);
         }
 
     }

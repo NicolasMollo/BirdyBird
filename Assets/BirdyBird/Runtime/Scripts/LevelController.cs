@@ -37,6 +37,8 @@ namespace BirdyBird.Level
             _fsm.Init();
             _player.Init(_input, _viewConfigurationData.playerViewData.AnimatorController);
             _parallaxSystem.Init(_viewConfigurationData.parallaxViewData.SpriteList);
+            _UI.SetBackgroundScoreColor(_viewConfigurationData.parallaxViewData.ScoreBackgroundColor);
+            _UI.SetTapHereTextColor(_viewConfigurationData.parallaxViewData.TextsColor);
         }
         private void SetUpDependencies()
         {
@@ -70,6 +72,7 @@ namespace BirdyBird.Level
         {
             _player.HealthModule.OnDeath += OnPlayerDeath;
             _UI.SubOnReloadButtonClick(OnReloadButtonClick);
+            _UI.SubOnExitButtonClick(OnExitButtonClick);
             GameEventBus.OnGameIdleStateEnter += OnGameIdleStateEnter;
             GameEventBus.OnGameIdleStateExit += OnGameIdleStateExit;
         }
@@ -77,8 +80,9 @@ namespace BirdyBird.Level
         {
             GameEventBus.OnGameIdleStateExit -= OnGameIdleStateExit;
             GameEventBus.OnGameIdleStateEnter -= OnGameIdleStateEnter;
-            _player.HealthModule.OnDeath -= OnPlayerDeath;
             _UI.UnsubFromOnReloadButtonClick(OnReloadButtonClick);
+            _UI.UnsubFromOnExitButtonClick(OnExitButtonClick);
+            _player.HealthModule.OnDeath -= OnPlayerDeath;
         }
 
         private void OnPlayerDeath()
@@ -89,6 +93,7 @@ namespace BirdyBird.Level
         {
             SceneManager.LoadScene(2, LoadSceneMode.Single);
         }
+        private void OnExitButtonClick() => SceneManager.LoadScene(1, LoadSceneMode.Single);
 
         private void OnGameIdleStateEnter()
         {

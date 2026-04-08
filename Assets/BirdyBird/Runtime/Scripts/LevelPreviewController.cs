@@ -12,6 +12,6 @@ namespace BirdyBird.Start
         private ParallaxSystem _previewParallax = null;
 
         internal void UpdatePlayerView(PlayerViewData data) => _previewPlayer.SetAnimatorController(data.AnimatorController);
-        internal void UpdateParallaxView(ParallaxViewData data) => _previewParallax.Init(data.SpriteList);
+        internal void UpdateParallaxView(LevelViewData data) => _previewParallax.Init(data.SpriteList);
     }
 }

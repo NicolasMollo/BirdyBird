@@ -7,6 +7,6 @@ namespace BirdyBird.Data
     public class LevelConfigurationData : ScriptableObject
     {
         public PlayerViewData playerViewData = null;
-        public ParallaxViewData parallaxViewData = null;
+        public LevelViewData parallaxViewData = null;
     }
 }

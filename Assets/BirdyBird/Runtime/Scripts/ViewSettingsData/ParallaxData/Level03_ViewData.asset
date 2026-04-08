@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 017e475e58ac4cb45ba7646bc66d2a16, type: 3}
-  m_Name: Parallax03_ViewData
+  m_Script: {fileID: 11500000, guid: f8b353649f6f553488ab0cf84bc6de57, type: 3}
+  m_Name: Level03_ViewData
   m_EditorClassIdentifier: 
   _spriteList:
   - type: 0
@@ -23,3 +23,5 @@ MonoBehaviour:
     sprite: {fileID: 1153061350772751188, guid: 6ee4bfdb221372747b23561a3de6cb90, type: 3}
   - type: 4
     sprite: {fileID: 3268891921755203321, guid: 0b4c3554bfab0fe4d8b39a48356422e3, type: 3}
+  <TextsColor>k__BackingField: {r: 0.83396226, g: 0.6318346, b: 0.029896643, a: 1}
+  <ScoreBackgroundColor>k__BackingField: {r: 0.5849056, g: 0.29803303, b: 0.11367031, a: 1}

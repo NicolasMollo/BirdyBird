@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playButton: {fileID: 696173829}
+  _gameTitle: {fileID: 724119765}
   _playerSelectionBlock: {fileID: 1896049062}
   _parallaxBlock: {fileID: 560517285}
   _levelConfigurationData: {fileID: 11400000, guid: f678427d2f4e574448e703c418a1194b, type: 2}
@@ -184,7 +185,7 @@ GameObject:
   - component: {fileID: 372809277}
   - component: {fileID: 372809276}
   m_Layer: 5
-  m_Name: Parallax02
+  m_Name: Level02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -221,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80f804126710b6439b52909aa21257d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _viewData: {fileID: 11400000, guid: 9f538a77abd8ea2418aa51e01c4076ee, type: 2}
+  _viewData: {fileID: 11400000, guid: cc618be734280ff418b35b47e095578b, type: 2}
 --- !u!114 &372809277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,7 +434,7 @@ GameObject:
   - component: {fileID: 550997179}
   - component: {fileID: 550997178}
   m_Layer: 5
-  m_Name: Parallax04
+  m_Name: Level04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -470,7 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80f804126710b6439b52909aa21257d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _viewData: {fileID: 11400000, guid: bdf66b1581465e84d9323502be2ba384, type: 2}
+  _viewData: {fileID: 11400000, guid: 8e58097b267c56940964b8c8f2ff5020, type: 2}
 --- !u!114 &550997179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,7 +521,7 @@ GameObject:
   - component: {fileID: 560517284}
   - component: {fileID: 560517285}
   m_Layer: 5
-  m_Name: ParallaxBlock
+  m_Name: LevelBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1637,7 +1638,7 @@ GameObject:
   - component: {fileID: 1601940032}
   - component: {fileID: 1601940031}
   m_Layer: 5
-  m_Name: Parallax03
+  m_Name: Level03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1674,7 +1675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80f804126710b6439b52909aa21257d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _viewData: {fileID: 11400000, guid: eb00c548ff418c54c9a0a54128a2a7c6, type: 2}
+  _viewData: {fileID: 11400000, guid: 4b729da8df7727a458b7b639acddaa32, type: 2}
 --- !u!114 &1601940032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2288,7 +2289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1845744242}
   m_Layer: 5
-  m_Name: ParallaxViewData
+  m_Name: LevelViewData
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2737,7 +2738,7 @@ GameObject:
   - component: {fileID: 2100424676}
   - component: {fileID: 2100424678}
   m_Layer: 5
-  m_Name: Parallax01
+  m_Name: Level01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2812,7 +2813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80f804126710b6439b52909aa21257d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _viewData: {fileID: 11400000, guid: 2e2ab1d0c3df1c643aff8269f9a40387, type: 2}
+  _viewData: {fileID: 11400000, guid: 6d202fde853303a4e81abf0de53b8bb1, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

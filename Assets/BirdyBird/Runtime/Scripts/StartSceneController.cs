@@ -1,5 +1,7 @@
 using BirdyBird.Data;
+using BirdyBird.Save;
 using BirdyBird.Start.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,9 +13,11 @@ namespace BirdyBird.Start
         [SerializeField]
         private Button _playButton = null;
         [SerializeField]
+        private TextMeshProUGUI _gameTitle = null;
+        [SerializeField]
         private PlayerSelectionBlock _playerSelectionBlock = null;
         [SerializeField]
-        private ParallaxSelectionBlock _parallaxBlock = null;
+        private LevelSelectionBlock _parallaxBlock = null;
         [SerializeField]
         private LevelConfigurationData _levelConfigurationData = null;
         [SerializeField]
@@ -31,18 +35,26 @@ namespace BirdyBird.Start
             _playerSelectionBlock.OnSelectViewData -= OnSelectPlayerViewData;
             _playButton.onClick.RemoveListener(OnClickPlayButton);
         }
+        private void Start()
+        {
+            _playerSelectionBlock.Init(SaveSystem.PlayerViewDataIndex);
+            _parallaxBlock.Init(SaveSystem.EnvironmentViewDataIndex);
+        }
 
         private void OnClickPlayButton() => SceneManager.LoadScene(2, LoadSceneMode.Single);
 
-        private void OnSelectPlayerViewData(PlayerViewData data)
+        private void OnSelectPlayerViewData(PlayerViewData data, int index)
         {
             _levelConfigurationData.playerViewData = data;
             _levelPreview.UpdatePlayerView(_levelConfigurationData.playerViewData);
+            SaveSystem.PlayerViewDataIndex = index;
         }
-        private void OnSelectParallaxViewData(ParallaxViewData data)
+        private void OnSelectParallaxViewData(LevelViewData data, int index)
         {
             _levelConfigurationData.parallaxViewData = data;
             _levelPreview.UpdateParallaxView(_levelConfigurationData.parallaxViewData);
+            _gameTitle.color = _levelConfigurationData.parallaxViewData.TextsColor;
+            SaveSystem.EnvironmentViewDataIndex = index;
         }
 
     }
