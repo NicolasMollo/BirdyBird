@@ -79,7 +79,6 @@ namespace BirdyBird.Player
 
         private void OnGameIdleStateEnter()
         {
-            // _input?.Disable();
             _movement.Disable();
         }
         private void OnGameStateEnter()

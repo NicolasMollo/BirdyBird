@@ -6,7 +6,7 @@ namespace BirdyBird.Save
     {
         private const string PLAYER_VIEWDATA_INDEX = "PlayerViewDataIndex";
         private const string ENVIRONMENT_VIEWDATA_INDEX = "EnvironmentDataIndex";
-        private const string MAX_SCORE = "MaxScore";
+        private const string BEST_SCORE = "BestScore";
 
         public static int PlayerViewDataIndex
         {
@@ -24,13 +24,18 @@ namespace BirdyBird.Save
                 PlayerPrefs.Save();
             }
         }
-        public static int MaxScore
+        public static int BestScore
         {
-            get { return PlayerPrefs.GetInt(MAX_SCORE, 0); }
+            get { return PlayerPrefs.GetInt(BEST_SCORE, 0); }
             set{
-                PlayerPrefs.SetInt(MAX_SCORE, value);
+                PlayerPrefs.SetInt(BEST_SCORE, value);
                 PlayerPrefs.Save();
             }
+        }
+
+        public static void DeleteData()
+        {
+            PlayerPrefs.DeleteAll();
         }
     }
 }

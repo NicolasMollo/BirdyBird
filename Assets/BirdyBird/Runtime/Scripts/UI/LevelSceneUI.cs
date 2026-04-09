@@ -6,9 +6,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace BirdyBird.UI
+namespace BirdyBird.Level.UI
 {
-    public class UISystem : MonoBehaviour
+    public class LevelSceneUI : MonoBehaviour
     {
         [SerializeField]
         private ScoreManager _scoreManager = null;
@@ -71,6 +71,7 @@ namespace BirdyBird.UI
         {
             _gameOverMenu.gameObject.SetActive(true);
             _gameOverMenu.SetScoreText(_scoreManager.Score.ToString());
+            _gameOverMenu.SetBestScoreText(_scoreManager.BestScore.ToString());
         }
         public void SubOnReloadButtonClick(UnityAction callback) => _gameOverMenu.SubOnReloadButtonClick(callback);
         public void UnsubFromOnReloadButtonClick(UnityAction callback) => _gameOverMenu.UnsubFromOnReloadButtonClick(callback);

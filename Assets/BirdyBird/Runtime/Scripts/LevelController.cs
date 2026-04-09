@@ -3,8 +3,8 @@ using BirdyBird.Data;
 using BirdyBird.Environment;
 using BirdyBird.Events;
 using BirdyBird.InputSystem;
+using BirdyBird.Level.UI;
 using BirdyBird.Player;
-using BirdyBird.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -20,7 +20,7 @@ namespace BirdyBird.Level
         [SerializeField]
         private ParallaxSystem _parallaxSystem = null;
         [SerializeField]
-        private UISystem _UI = null;
+        private LevelSceneUI _UI = null;
         [SerializeField]
         private LevelConfigurationData _viewConfigurationData = null;
 
@@ -39,6 +39,7 @@ namespace BirdyBird.Level
             _parallaxSystem.Init(_viewConfigurationData.parallaxViewData.SpriteList);
             _UI.SetBackgroundScoreColor(_viewConfigurationData.parallaxViewData.ScoreBackgroundColor);
             _UI.SetTapHereTextColor(_viewConfigurationData.parallaxViewData.TextsColor);
+            // BirdyBird.Save.SaveSystem.DeleteData();
         }
         private void SetUpDependencies()
         {
@@ -50,18 +51,6 @@ namespace BirdyBird.Level
             _input.InputActions.UI.Enable();
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                // _parallax.StopParallax();
-                SceneManager.LoadScene(0);
-            }
-            else if (Input.GetKeyDown(KeyCode.B))
-            {
-                // _parallax.IncreaseSpeed(1.5f);
-            }
-        }
         private void OnDestroy()
         {
             RemoveListeners();

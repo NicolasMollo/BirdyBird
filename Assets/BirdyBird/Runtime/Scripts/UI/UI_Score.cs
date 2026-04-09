@@ -3,7 +3,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace BirdyBird.UI
+namespace BirdyBird.Level.UI
 {
     internal class UI_Score : MonoBehaviour
     {
