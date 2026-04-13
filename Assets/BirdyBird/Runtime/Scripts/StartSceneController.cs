@@ -13,6 +13,8 @@ namespace BirdyBird.Start
         [SerializeField]
         private Button _playButton = null;
         [SerializeField]
+        private Button _exitButton = null;
+        [SerializeField]
         private TextMeshProUGUI _gameTitle = null;
         [SerializeField]
         private PlayerSelectionBlock _playerSelectionBlock = null;
@@ -23,25 +25,31 @@ namespace BirdyBird.Start
         [SerializeField]
         private LevelPreviewController _levelPreview = null;
 
-        private void OnEnable()
-        {
-            _playButton.onClick.AddListener(OnClickPlayButton);
-            _playerSelectionBlock.OnSelectViewData += OnSelectPlayerViewData;
-            _parallaxBlock.OnSelectViewData += OnSelectParallaxViewData;
-        }
-        private void OnDisable()
-        {
-            _parallaxBlock.OnSelectViewData -= OnSelectParallaxViewData;
-            _playerSelectionBlock.OnSelectViewData -= OnSelectPlayerViewData;
-            _playButton.onClick.RemoveListener(OnClickPlayButton);
-        }
+        private void OnEnable() => AddListeners();
+        private void OnDisable() => RemoveListeners();
         private void Start()
         {
             _playerSelectionBlock.Init(SaveSystem.PlayerViewDataIndex);
             _parallaxBlock.Init(SaveSystem.EnvironmentViewDataIndex);
         }
 
+        private void AddListeners()
+        {
+            _playButton.onClick.AddListener(OnClickPlayButton);
+            _exitButton.onClick.AddListener(OnClickExitButton);
+            _playerSelectionBlock.OnSelectViewData += OnSelectPlayerViewData;
+            _parallaxBlock.OnSelectViewData += OnSelectParallaxViewData;
+        }
+        private void RemoveListeners()
+        {
+            _parallaxBlock.OnSelectViewData -= OnSelectParallaxViewData;
+            _playerSelectionBlock.OnSelectViewData -= OnSelectPlayerViewData;
+            _exitButton.onClick.RemoveListener(OnClickExitButton);
+            _playButton.onClick.RemoveListener(OnClickPlayButton);
+        }
+
         private void OnClickPlayButton() => SceneManager.LoadScene(2, LoadSceneMode.Single);
+        private void OnClickExitButton() => Application.Quit();
 
         private void OnSelectPlayerViewData(PlayerViewData data, int index)
         {

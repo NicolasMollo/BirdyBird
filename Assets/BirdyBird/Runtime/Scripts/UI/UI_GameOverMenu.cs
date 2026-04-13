@@ -15,7 +15,12 @@ namespace BirdyBird.Level.UI
         private Button _reloadButton = null;
         [SerializeField]
         private Button _exitButton = null;
+        [SerializeField]
+        private Image _trophyImage = null;
 
+        private void Awake() => _trophyImage.gameObject.SetActive(false);
+
+        internal void ActivateTrophyImage() => _trophyImage.gameObject.SetActive(true);
         internal void SetScoreText(string text) => _scoreText.text = text;
         internal void SetBestScoreText(string text) => _bestScoreText.text = text;
         internal void SubOnReloadButtonClick(UnityAction callback) => _reloadButton.onClick.AddListener(callback);

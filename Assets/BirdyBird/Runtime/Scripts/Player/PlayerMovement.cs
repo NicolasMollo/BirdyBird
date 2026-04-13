@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BirdyBird.Player
 {
@@ -78,6 +77,10 @@ namespace BirdyBird.Player
         {
             _canRotate = true;
             _rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+        }
+        internal void ResetVelocity()
+        {
+            _rb.velocity = new Vector2(_rb.velocity.x, 0);
         }
 
     }

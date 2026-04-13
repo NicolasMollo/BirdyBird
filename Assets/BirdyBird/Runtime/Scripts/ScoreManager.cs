@@ -12,6 +12,7 @@ namespace BirdyBird.Score
         public int Score { get { return _score; } }
         public int BestScore { get { return _bestScore; } }
         public event Action<int> OnScoreChanged = null;
+        public event Action<int> OnBestScoreChanged = null;
 
         private void OnEnable() => AddListeners();
         private void OnDisable() => RemoveListeners();
@@ -38,6 +39,7 @@ namespace BirdyBird.Score
             if (_score > _bestScore)
             {
                 _bestScore = _score;
+                OnBestScoreChanged?.Invoke(_bestScore);
                 SaveSystem.BestScore = _bestScore;
             }
         }

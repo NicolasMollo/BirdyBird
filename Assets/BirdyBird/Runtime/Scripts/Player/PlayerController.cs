@@ -75,6 +75,7 @@ namespace BirdyBird.Player
         private void OnDeath()
         {
             _input.Disable();
+            _movement.ResetVelocity();
         }
 
         private void OnGameIdleStateEnter()

@@ -33,6 +33,7 @@ namespace BirdyBird.Level.UI
         private void AddListeners()
         {
             _scoreManager.OnScoreChanged += OnScoreChanged;
+            _scoreManager.OnBestScoreChanged += OnBestScoreChanged;
             GameEventBus.OnGameIdleStateEnter += OnGameIdleStateEnter;
             GameEventBus.OnGameStateEnter += OnGameStateEnter;
             GameEventBus.OnGameOverStateEnter += OnGameOverStateEnter;
@@ -42,12 +43,17 @@ namespace BirdyBird.Level.UI
             GameEventBus.OnGameOverStateEnter -= OnGameOverStateEnter;
             GameEventBus.OnGameStateEnter -= OnGameStateEnter;
             GameEventBus.OnGameIdleStateEnter -= OnGameIdleStateEnter;
+            _scoreManager.OnBestScoreChanged -= OnBestScoreChanged;
             _scoreManager.OnScoreChanged -= OnScoreChanged;
         }
 
         private void OnScoreChanged(int score)
         {
             _score.SetScoreText(score.ToString());
+        }
+        private void OnBestScoreChanged(int bestScore)
+        {
+            _gameOverMenu.ActivateTrophyImage();
         }
         private void OnGameOverStateEnter()
         {
