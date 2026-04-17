@@ -53,7 +53,7 @@ namespace BirdyBird.Level.UI
         }
         private void OnBestScoreChanged(int bestScore)
         {
-            _gameOverMenu.ActivateTrophyImage();
+            _gameOverMenu.ActivateNewRecordBlock();
         }
         private void OnGameOverStateEnter()
         {
