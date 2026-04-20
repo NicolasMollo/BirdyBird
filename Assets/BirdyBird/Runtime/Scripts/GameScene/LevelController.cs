@@ -1,10 +1,12 @@
 using BirdyBird.AI;
+using BirdyBird.Audio;
 using BirdyBird.Data;
 using BirdyBird.Environment;
 using BirdyBird.Events;
 using BirdyBird.InputSystem;
 using BirdyBird.Level.UI;
 using BirdyBird.Player;
+using BirdyBird.Score;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -20,11 +22,14 @@ namespace BirdyBird.Level
         [SerializeField]
         private ParallaxSystem _parallaxSystem = null;
         [SerializeField]
+        private ScoreManager _scoreManager = null;
+        [SerializeField]
         private LevelSceneUI _UI = null;
         [SerializeField]
-        private LevelConfigurationData _viewConfigurationData = null;
+        private LevelConfigurationData _configurationData = null;
 
         private InputActionContainer _input = null;
+        private AudioManager _audioManager = null;
 
         private void Awake()
         {
@@ -35,16 +40,18 @@ namespace BirdyBird.Level
         {
             AddListeners();
             _fsm.Init();
-            _player.Init(_input, _viewConfigurationData.playerViewData.AnimatorController);
-            _parallaxSystem.Init(_viewConfigurationData.parallaxViewData.SpriteList);
-            _UI.SetBackgroundScoreColor(_viewConfigurationData.parallaxViewData.ScoreBackgroundColor);
-            _UI.SetTapHereTextColor(_viewConfigurationData.parallaxViewData.TextsColor);
+            _player.Init(_input, _configurationData.playerViewData.AnimatorController, _audioManager);
+            _parallaxSystem.Init(_configurationData.parallaxViewData.SpriteList);
+            _audioManager.PlayMusic(_configurationData.parallaxViewData.Clip);
+            _UI.SetBackgroundScoreColor(_configurationData.parallaxViewData.ScoreBackgroundColor);
+            _UI.SetTapHereTextColor(_configurationData.parallaxViewData.TextsColor);
             // BirdyBird.Save.SaveSystem.DeleteData();
         }
         private void SetUpDependencies()
         {
             GameManager gm = GameManager.Instance;
             _input = gm.InputContainer;
+            _audioManager = gm.AudioManager;
         }
         private void SetUpInput()
         {
@@ -62,6 +69,7 @@ namespace BirdyBird.Level
             _player.HealthModule.OnDeath += OnPlayerDeath;
             _UI.SubOnReloadButtonClick(OnReloadButtonClick);
             _UI.SubOnExitButtonClick(OnExitButtonClick);
+            _scoreManager.OnScoreChanged += OnScoreChanged;
             GameEventBus.OnGameIdleStateEnter += OnGameIdleStateEnter;
             GameEventBus.OnGameIdleStateExit += OnGameIdleStateExit;
         }
@@ -69,6 +77,7 @@ namespace BirdyBird.Level
         {
             GameEventBus.OnGameIdleStateExit -= OnGameIdleStateExit;
             GameEventBus.OnGameIdleStateEnter -= OnGameIdleStateEnter;
+            _scoreManager.OnScoreChanged -= OnScoreChanged;
             _UI.UnsubFromOnReloadButtonClick(OnReloadButtonClick);
             _UI.UnsubFromOnExitButtonClick(OnExitButtonClick);
             _player.HealthModule.OnDeath -= OnPlayerDeath;
@@ -81,8 +90,13 @@ namespace BirdyBird.Level
         private void OnReloadButtonClick()
         {
             SceneManager.LoadScene(2, LoadSceneMode.Single);
+            _audioManager.PlaySfx(SfxType.ConfirmButton);
         }
-        private void OnExitButtonClick() => SceneManager.LoadScene(1, LoadSceneMode.Single);
+        private void OnExitButtonClick()
+        {
+            SceneManager.LoadScene(1, LoadSceneMode.Single);
+            _audioManager.PlaySfx(SfxType.BackButton);
+        }
 
         private void OnGameIdleStateEnter()
         {
@@ -98,6 +112,10 @@ namespace BirdyBird.Level
             _fsm.ChangeState<GameState>();
         }
 
+        private void OnScoreChanged(int score)
+        {
+            _audioManager.PlaySfx(SfxType.Score);
+        }
 
     }
 }

@@ -1,3 +1,4 @@
+using BirdyBird.Audio;
 using BirdyBird.Data;
 using BirdyBird.Save;
 using BirdyBird.Start.UI;
@@ -24,13 +25,23 @@ namespace BirdyBird.Start
         private LevelConfigurationData _levelConfigurationData = null;
         [SerializeField]
         private LevelPreviewController _levelPreview = null;
+        [SerializeField]
+        private AudioClip _musicClip = null;
 
+        private AudioManager _audioManager = null;
+
+        private void Awake()
+        {
+            GameManager gm = GameManager.Instance;
+            _audioManager = gm.AudioManager;
+        }
         private void OnEnable() => AddListeners();
         private void OnDisable() => RemoveListeners();
         private void Start()
         {
             _playerSelectionBlock.Init(SaveSystem.PlayerViewDataIndex);
             _parallaxBlock.Init(SaveSystem.EnvironmentViewDataIndex);
+            _audioManager.PlayMusic(_musicClip);
         }
 
         private void AddListeners()
@@ -39,6 +50,10 @@ namespace BirdyBird.Start
             _exitButton.onClick.AddListener(OnClickExitButton);
             _playerSelectionBlock.OnSelectViewData += OnSelectPlayerViewData;
             _parallaxBlock.OnSelectViewData += OnSelectParallaxViewData;
+            _playerSelectionBlock.OnLeftButtonClick += OnClickSelectionBlockButton;
+            _playerSelectionBlock.OnRightButtonClick += OnClickSelectionBlockButton;
+            _parallaxBlock.OnLeftButtonClick += OnClickSelectionBlockButton;
+            _parallaxBlock.OnRightButtonClick += OnClickSelectionBlockButton;
         }
         private void RemoveListeners()
         {
@@ -46,11 +61,21 @@ namespace BirdyBird.Start
             _playerSelectionBlock.OnSelectViewData -= OnSelectPlayerViewData;
             _exitButton.onClick.RemoveListener(OnClickExitButton);
             _playButton.onClick.RemoveListener(OnClickPlayButton);
+            _playerSelectionBlock.OnLeftButtonClick -= OnClickSelectionBlockButton;
+            _playerSelectionBlock.OnRightButtonClick -= OnClickSelectionBlockButton;
+            _parallaxBlock.OnLeftButtonClick -= OnClickSelectionBlockButton;
+            _parallaxBlock.OnRightButtonClick -= OnClickSelectionBlockButton;
         }
 
-        private void OnClickPlayButton() => SceneManager.LoadScene(2, LoadSceneMode.Single);
+        private void OnClickPlayButton()
+        {
+            SceneManager.LoadScene(2, LoadSceneMode.Single);
+            _audioManager.PlaySfx(SfxType.ConfirmButton);
+        }
+
         private void OnClickExitButton() => Application.Quit();
 
+        private void OnClickSelectionBlockButton() => _audioManager.PlaySfx(SfxType.ConfirmButton);
         private void OnSelectPlayerViewData(PlayerViewData data, int index)
         {
             _levelConfigurationData.playerViewData = data;

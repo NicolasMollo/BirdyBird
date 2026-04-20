@@ -1,3 +1,4 @@
+using BirdyBird.Audio;
 using BirdyBird.InputSystem;
 using BirdyBird.Save;
 using UnityEngine;
@@ -16,6 +17,10 @@ namespace BirdyBird
         [SerializeField]
         private InputActionContainer _inputContainer = null;
         public InputActionContainer InputContainer { get { return _inputContainer; } }
+
+        [SerializeField]
+        private AudioManager _audioManager = null;
+        public AudioManager AudioManager { get { return _audioManager; } }
 
         private void Awake()
         {

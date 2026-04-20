@@ -27,5 +27,7 @@ namespace BirdyBird.Start.UI
         public Color TextsColor {  get; private set; }
         [field:SerializeField]
         public Color ScoreBackgroundColor { get; private set; }
+        [field: SerializeField]
+        public AudioClip Clip { get; private set; }
     }
 }

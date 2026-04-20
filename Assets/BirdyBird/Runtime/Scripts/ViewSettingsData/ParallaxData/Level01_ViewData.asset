@@ -25,3 +25,4 @@ MonoBehaviour:
     sprite: {fileID: 3268891921755203321, guid: ed68727ab55ff004b86d357793506644, type: 3}
   <TextsColor>k__BackingField: {r: 0.5396226, g: 0.015272246, b: 0.015272246, a: 1}
   <ScoreBackgroundColor>k__BackingField: {r: 0.2014527, g: 0.16695617, b: 0.6754716, a: 1}
+  <Clip>k__BackingField: {fileID: 8300000, guid: 3f320ed6ef3218049ab06061ddbb8d20, type: 3}

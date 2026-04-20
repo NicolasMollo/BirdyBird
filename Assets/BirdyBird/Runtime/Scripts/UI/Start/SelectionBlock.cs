@@ -16,6 +16,8 @@ namespace BirdyBird.Start.UI
 
         private ViewDataContainer<T> _selectedViewData = null;
         public Action<T, int> OnSelectViewData = null;
+        public Action OnLeftButtonClick = null;
+        public Action OnRightButtonClick = null;
 
         public void Init(int selectedViewDataIndex = 0)
         {
@@ -26,14 +28,19 @@ namespace BirdyBird.Start.UI
 
         private void OnEnable()
         {
+            _leftButton.onClick.AddListener(CallOnLeftButtonClick);
             _leftButton.onClick.AddListener(SelectPreviousViewData);
+            _rightButton.onClick.AddListener(CallOnRightButtonClick);
             _rightButton.onClick.AddListener(SelectNextViewData);
         }
         private void OnDisable()
         {
-            _rightButton.onClick.RemoveListener(SelectNextViewData);
-            _leftButton.onClick.RemoveListener(SelectPreviousViewData);
+            _rightButton.onClick.RemoveAllListeners();
+            _leftButton.onClick.RemoveAllListeners();
         }
+
+        private void CallOnLeftButtonClick() => OnLeftButtonClick?.Invoke();
+        private void CallOnRightButtonClick() => OnRightButtonClick?.Invoke();
 
         private void SelectNextViewData()
         {

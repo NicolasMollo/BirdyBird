@@ -10,12 +10,11 @@ namespace BirdyBird.Toolkit
         private float _fadeInTreshold = 0f;
         [SerializeField, Range(0f, 255f)]
         private float _fadeOutTreshold = 0f;
-        [SerializeField, Range(0f, 0.1f)]
+        [SerializeField, Range(0f, 10f)]
         private float _fadeInDelay = 0f;
-        [SerializeField, Range(0f, 0.1f)]
+        [SerializeField, Range(0f, 10f)]
         private float _fadeOutDelay = 0f;
         private GraphicsAdapter _graphicsAdapter = null;
-        private const float FADE_OFFSET = 0.01f;
 
         private void Awake()
         {
@@ -30,36 +29,55 @@ namespace BirdyBird.Toolkit
 
         private IEnumerator PrivateFadeIn(Action onComplete)
         {
-            float alpha = _graphicsAdapter.Color.a;
-            float normalizedTreshold = _fadeInTreshold / 255f;
-            while (alpha < normalizedTreshold)
+            float startAlpha = _graphicsAdapter.Color.a;
+            float targetAlpha = _fadeInTreshold / 255f;
+            float time = 0f;
+
+            while (time < _fadeInDelay)
             {
-                alpha += FADE_OFFSET;
+                time += Time.deltaTime;
+                float alpha = Mathf.Lerp(startAlpha, targetAlpha, time / _fadeInDelay);
+
                 _graphicsAdapter.Color = new Color(
                     _graphicsAdapter.Color.r,
                     _graphicsAdapter.Color.g,
                     _graphicsAdapter.Color.b,
                     alpha
-                    );
-                yield return new WaitForSeconds(_fadeInDelay);
+                );
+
+                yield return null;
             }
+
             onComplete?.Invoke();
         }
+
         private IEnumerator PrivateFadeOut(Action onComplete)
         {
-            float alpha = _graphicsAdapter.Color.a;
-            float normalizedTreshold = _fadeOutTreshold / 255f;
-            while (alpha > normalizedTreshold)
+            float startAlpha = _graphicsAdapter.Color.a;
+            float targetAlpha = _fadeOutTreshold / 255f;
+            float time = 0f;
+
+            while (time < _fadeOutDelay)
             {
-                alpha -= FADE_OFFSET;
+                time += Time.deltaTime;
+                float alpha = Mathf.Lerp(startAlpha, targetAlpha, time / _fadeOutDelay);
+
                 _graphicsAdapter.Color = new Color(
                     _graphicsAdapter.Color.r,
                     _graphicsAdapter.Color.g,
                     _graphicsAdapter.Color.b,
                     alpha
-                    );
-                yield return new WaitForSeconds(_fadeOutDelay);
+                );
+
+                yield return null;
             }
+            _graphicsAdapter.Color = new Color(
+                _graphicsAdapter.Color.r,
+                _graphicsAdapter.Color.g,
+                _graphicsAdapter.Color.b,
+                targetAlpha
+            );
+
             onComplete?.Invoke();
         }
     }

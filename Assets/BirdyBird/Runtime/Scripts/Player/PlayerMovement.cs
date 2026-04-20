@@ -10,7 +10,7 @@ namespace BirdyBird.Player
         [SerializeField]
         private float _movementSpeed = 0f;
         [SerializeField]
-        private float _rotationSpeed = 0f;
+        private float _rotationSpeed = 0f; // Android: 30f; Others: 15f
         [SerializeField]
         private float _minRotation = 0f;
         [SerializeField]
@@ -21,7 +21,7 @@ namespace BirdyBird.Player
         private float _rotationAngle = 0f;
         private float _rotationTarget = 0f;
         private float _currentRotationSpeed = 0f;
-        private const float FALLDOWN_ROTATION_SPEED = 2f;
+        private const float FALLDOWN_ROTATION_SPEED = 2.5f; // Android: 4f; Others: 2f
         private bool _canRotate = false;
 
 
@@ -58,7 +58,11 @@ namespace BirdyBird.Player
                 _rotationTarget = _minRotation;
                 _currentRotationSpeed = FALLDOWN_ROTATION_SPEED;
             }
-            _rotationAngle = Mathf.MoveTowards(_rb.rotation, _rotationTarget, _currentRotationSpeed);
+            _rotationAngle = Mathf.MoveTowards(
+                _rb.rotation,
+                _rotationTarget,
+                _currentRotationSpeed
+                );
         }
 
         internal void Move()

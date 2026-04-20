@@ -1,3 +1,4 @@
+using BirdyBird.Audio;
 using BirdyBird.Events;
 using BirdyBird.Health;
 using BirdyBird.InputSystem;
@@ -6,12 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace BirdyBird.Player
 {
-   [RequireComponent
-        (
-        typeof(PlayerMovement), 
-        typeof(PlayerAnimation),
-        typeof(HealthModule)
-        )]
+   [RequireComponent(typeof(PlayerMovement), typeof(PlayerAnimation), typeof(HealthModule))]
     public class PlayerController : MonoBehaviour
     {
         private PlayerInput _input = null;
@@ -19,14 +15,16 @@ namespace BirdyBird.Player
         private bool _canMove = false;
         private PlayerAnimation _animation = null;
         private HealthModule _healthModule = null;
+        private AudioManager _audioManager = null;
         public HealthModule HealthModule { get { return _healthModule; } }
 
-        public void Init(InputActionContainer inputContainer, RuntimeAnimatorController animatorController)
+        public void Init(InputActionContainer inputContainer, RuntimeAnimatorController animatorController, AudioManager audioManager)
         {
             _input = new PlayerInput(inputContainer);
             _input.SubscribeOnMove(OnMoveInputPerformed);
             _input.Disable();
             _animation.SetAnimatorController(animatorController);
+            _audioManager = audioManager;
         }
         private void Awake()
         {
@@ -51,6 +49,7 @@ namespace BirdyBird.Player
             {
                 _movement.Move();
                 _animation.Fly();
+                _audioManager.PlaySfx(SfxType.Fly);
                 _canMove = false;
             }
         }
@@ -76,6 +75,7 @@ namespace BirdyBird.Player
         {
             _input.Disable();
             _movement.ResetVelocity();
+            _audioManager.PlaySfx(SfxType.Death);
         }
 
         private void OnGameIdleStateEnter()
