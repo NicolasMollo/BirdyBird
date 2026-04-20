@@ -45,7 +45,6 @@ namespace BirdyBird.Level
             _audioManager.PlayMusic(_configurationData.parallaxViewData.Clip);
             _UI.SetBackgroundScoreColor(_configurationData.parallaxViewData.ScoreBackgroundColor);
             _UI.SetTapHereTextColor(_configurationData.parallaxViewData.TextsColor);
-            // BirdyBird.Save.SaveSystem.DeleteData();
         }
         private void SetUpDependencies()
         {
