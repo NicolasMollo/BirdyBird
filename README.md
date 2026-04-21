@@ -3,13 +3,6 @@
 A fast-paced Flappy Bird–style game where timing is everything.  
 Simple controls, endless challenge.
 
-## 🕹️ Controls
-
-| Input        | Action |
-|--------------|--------|
-| Click / Tap  | Flap   |
-| Spacebar     | Flap   |
-
 ## 🚀 Play the Game
 
 👉 [BirdyBird WebGL](https://nicolas-mollo.itch.io/birdybird)
